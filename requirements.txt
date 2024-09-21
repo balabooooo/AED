@@ -1,0 +1,8 @@
+tqdm
+scipy
+opencv-python
+lap
+tensorboard
+git+https://github.com/TAO-Dataset/tao
+# optional
+git+https://github.com/SysCV/tet.git/#subdirectory=teta

@@ -1,0 +1,41 @@
+--meta_arch AED
+--dataset_file dancetrack
+--epoch 5
+--print_freq 500
+--with_box_refine
+--lr_drop 2
+--lr 1e-4
+--lr_linear_proj_mult 1
+--lr_backbone 1e-4
+--pretrained /home/fzm/AED/pretrained/r50_deformable_detr_plus_iterative_bbox_refinement-checkpoint.pth
+--batch_size 1
+--sampler_lengths 5
+--decoder_cross_self
+--clip_max_norm 10
+--save_period 9
+--sample_mode random_interval
+--mot_path /home/fzm/AED/data
+--train_det_path /data/fzm/Datasets/YOLOX_DanceTrack_train_val_test.json
+--val_det_path /data/fzm/Datasets/YOLOX_DanceTrack_train_val_test.json
+--bbox_loss_coef 1
+--giou_loss_coef 1
+--pt_weight_loss_coef 5
+--pp_weight_loss_coef 1
+--cross_clip_weight_loss_coef 1
+--val_nms_thresh 1
+--val_score_thresh 0.1
+--train_score_thresh 0.001
+--add_extra_dets
+--random_drop 0
+--dec_n_points 4
+--match_high_score 0.85
+--val_match_high_thresh 0.75
+--val_match_low_thresh 0.5
+--train_match_thresh 0.8
+--val_max_det_num 70
+--train_max_det_num 70
+--max_track_num 70
+--train_iou_thresh 0.5
+--ema_weight 0.5
+--sample_interval 10
+--clip_gap 1

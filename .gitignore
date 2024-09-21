@@ -1,0 +1,15 @@
+__pycache__/
+.vscode/
+exps/
+build/
+dist/
+pretrained/
+data/*
+*.pth
+*.train
+*.egg
+*.egg-info
+*.mp4
+*.jpg
+*.png
+*.log
