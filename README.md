@@ -109,19 +109,9 @@ Here are the details for the json files:
 │       │   ├── checksums
 │       │   ├── README.md
 │       │   ├── tao_test_burst_v1.json
-│       │   ├── test_categories.json
-│       │   ├── test_ours.json
-│       │   ├── test_without_annotations.json
-│       │   ├── train.json
-│       │   ├── train_ours.json
 │       │   ├── train_ours_v1.json
-│       │   ├── train_with_freeform.json
-│       │   ├── validation.json
-│       │   ├── validation_ours.json
 │       │   ├── validation_ours_v1.json
-│       │   ├── validation_with_freeform.json
-│       │   └── video-lists
-│       ├── annotations.tar.gz
+│       │   └── ...
 │       └── frames
 │           ├── test
 │           ├── train
