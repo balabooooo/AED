@@ -57,6 +57,7 @@ Pleases download DanceTrack from [DanceTrack](https://github.com/DanceTrack/Danc
 We've run the inference phase on two detectors, RegionCLIP and Co-DETR, and saved their detection results as JSON files.
 
 For YOLOX, we get the detection results from [MixSort](https://github.com/MCG-NJU/MixSort) and [MOTRv2](https://github.com/megvii-research/MOTRv2) for SportsMOT and DanceTrack respectively.
+
 All of the detection results can be downloaded from [here](https://drive.google.com/file/d/1dcdcwIpxZ0E7mni1_pnbhuIRiufHmUpB/view?usp=sharing).
 
 Here are the details for the json files:
