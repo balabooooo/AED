@@ -55,8 +55,10 @@ Pleases download SportsMOT from [SportsMOT](https://github.com/MCG-NJU/SportsMOT
 Pleases download DanceTrack from [DanceTrack](https://github.com/DanceTrack/DanceTrack).
 ### Detection Results
 We've run the inference phase on two detectors, RegionCLIP and Co-DETR, and saved their detection results as JSON files.
+
 For YOLOX, we get the detection results from [MixSort](https://github.com/MCG-NJU/MixSort) and [MOTRv2](https://github.com/megvii-research/MOTRv2) for SportsMOT and DanceTrack respectively.
 All of the detection results can be downloaded from [here](https://drive.google.com/file/d/1dcdcwIpxZ0E7mni1_pnbhuIRiufHmUpB/view?usp=sharing).
+
 Here are the details for the json files:
 
 | JSON File                              | Dataset                        | **Detector**                                                                                              |
@@ -155,6 +157,7 @@ bash tools/inference_sportsmot.sh [checkpoint path] [config path] [split (val / 
 bash tools/inference_dancetrack.sh [checkpoint path] [config path] [split (val / test)] [GPU index]
 ```
 After inference, the results are saved in `$AED/exps/[dataset name]_infer_results`.
+
 For SportsMOT and DanceTrack, you can upload the results to [codalab](https://codalab.lisn.upsaclay.fr/) to get the final score.
 ## Evaluations (Optional)
 ### TAO
