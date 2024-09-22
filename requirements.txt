@@ -3,6 +3,7 @@ scipy
 opencv-python
 lap
 tensorboard
+setuptools==59.5.0
 git+https://github.com/TAO-Dataset/tao
-# optional
+# for tao evaluation (optional)
 git+https://github.com/SysCV/tet.git/#subdirectory=teta
