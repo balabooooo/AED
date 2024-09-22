@@ -27,7 +27,7 @@ mkdir -p $OUTPUT_BASE
 
 for INFER in $(seq 100); do
   ls $OUTPUT_BASE | grep infer$INFER && continue
-  OUTPUT_DIR=$OUTPUT_BASE/infer$INFER
+  OUTPUT_DIR=$OUTPUT_BASE/infer$INFER$3
   mkdir $OUTPUT_DIR && break
 done
 
