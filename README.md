@@ -1,4 +1,4 @@
-# AED
+# Associate Everything Detected: Facilitating Tracking-by-Detection to the Unknown
 [![arXiv](https://img.shields.io/badge/arXiv-2409.09293-red.svg)](https://arxiv.org/abs/2409.09293)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/associate-everything-detected-facilitating/multi-object-tracking-on-tao)](https://paperswithcode.com/sota/multi-object-tracking-on-tao?p=associate-everything-detected-facilitating)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/associate-everything-detected-facilitating/multi-object-tracking-on-sportsmot)](https://paperswithcode.com/sota/multi-object-tracking-on-sportsmot?p=associate-everything-detected-facilitating)
