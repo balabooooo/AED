@@ -4,17 +4,11 @@ import torch.nn.functional as F
 
 
 class WeightAttention(nn.Module):
-    def __init__(self, dim, num_heads=8, qk_bias=True, attn_drop=0.0, extra_value=5.0,
-                 width=200, dummy_value=0.0):
+    def __init__(self, dim, num_heads=8, qk_bias=True, attn_drop=0.0):
         super().__init__()
         self.dim = dim
         self.num_heads = num_heads
         assert dim % num_heads == 0
-        head_dim = dim // num_heads
-        self.scale = float(head_dim) ** -0.5
-        self.extra_value = extra_value
-        self.width = width
-        self.dummy_value = dummy_value
 
         self.linear = nn.Linear(dim, dim, bias=qk_bias)
         self.dropout = nn.Dropout(attn_drop)
