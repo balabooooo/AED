@@ -32,7 +32,7 @@ class DeformableTransformer(nn.Module):
                  activation="relu", return_intermediate_dec=False,
                  num_feature_levels=4, dec_n_points=4,  enc_n_points=4,
                  two_stage=False, two_stage_num_proposals=300, decoder_self_cross=True, sigmoid_attn=False,
-                 extra_track_attn=False, memory_bank=False, weight_attn_width=200):
+                 extra_track_attn=False, memory_bank=False):
         super().__init__()
 
         self.new_frame_adaptor = None
@@ -52,7 +52,7 @@ class DeformableTransformer(nn.Module):
                                                           dropout, activation,
                                                           num_feature_levels, nhead, dec_n_points, decoder_self_cross,
                                                           sigmoid_attn=sigmoid_attn, extra_track_attn=extra_track_attn,
-                                                          memory_bank=memory_bank, weight_attn_width=weight_attn_width)
+                                                          memory_bank=memory_bank)
         self.decoder = SimDecoder(decoder_layer, num_decoder_layers, return_intermediate_dec)
 
         self.level_embed = nn.Parameter(torch.Tensor(num_feature_levels, d_model))
@@ -277,7 +277,7 @@ class SimDecoderLayer(nn.Module):
     def __init__(self, d_model=256, d_ffn=1024,
                  dropout=0.1, activation="relu",
                  n_levels=4, n_heads=8, n_points=4, self_cross=True, sigmoid_attn=False,
-                 extra_track_attn=False, memory_bank=False, weight_attn_width=200):
+                 extra_track_attn=False, memory_bank=False):
         super().__init__()
 
         self.self_cross = self_cross
@@ -288,7 +288,7 @@ class SimDecoderLayer(nn.Module):
         self.cross_attn = MSDeformAttn(d_model, n_levels, n_heads, n_points, sigmoid_attn=sigmoid_attn)
         self.dropout1 = nn.Dropout(dropout)
         self.norm1 = nn.LayerNorm(d_model)
-        self.weight_attn = WeightAttention(d_model, 2, attn_drop=dropout, width=weight_attn_width)
+        self.weight_attn = WeightAttention(d_model, 2, attn_drop=dropout)
 
         # ffn for proposals
         self.linear1 = nn.Linear(d_model, d_ffn)
@@ -476,7 +476,6 @@ def build_deforamble_transformer(args):
         sigmoid_attn=args.sigmoid_attn,
         extra_track_attn=args.extra_track_attn,
         memory_bank=False,
-        weight_attn_width=args.max_track_num
     )
 
 
