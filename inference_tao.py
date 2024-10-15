@@ -89,7 +89,7 @@ class ListImgDataset(Dataset):
         return self.init_img(img, proposals)
 
 class MyTracker:
-    def __init__(self, args, model, data, gt_file='eval/train.json'):
+    def __init__(self, args, model, data):
         self.args = args
         self.detr = model
         self.imgs = data['imgs']
