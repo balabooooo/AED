@@ -4,6 +4,8 @@
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/associate-everything-detected-facilitating/multi-object-tracking-on-sportsmot)](https://paperswithcode.com/sota/multi-object-tracking-on-sportsmot?p=associate-everything-detected-facilitating)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/associate-everything-detected-facilitating/multi-object-tracking-on-dancetrack)](https://paperswithcode.com/sota/multi-object-tracking-on-dancetrack?p=associate-everything-detected-facilitating)
 
+This repository is an official implementation of the paper [Associate Everything Detected: Facilitating Tracking-by-Detection to the Unknown](https://arxiv.org/abs/2409.09293).
+
 This repository is still under development, and feel free to raise any issues at any time.
 ## News🔥
 * (2024/9/14) Our paper is available at [arXiv](https://arxiv.org/abs/2409.09293).
