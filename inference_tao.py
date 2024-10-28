@@ -131,8 +131,9 @@ class MyTracker:
 
             res = self.detr.inference_single_image(cur_img, (seq_h, seq_w), num_proposals, track_instances, proposal)
             track_instances = res['track_instances']
+            num_active_proposals = res['num_active_proposals']
 
-            dt_instances = deepcopy(track_instances[:num_proposals])
+            dt_instances = deepcopy(track_instances[:num_active_proposals])
 
             dt_instances = self.filter_dt_by_area(dt_instances, area_threshold)
 
