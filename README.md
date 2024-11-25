@@ -7,10 +7,13 @@
 This repository is an official implementation of the paper [Associate Everything Detected: Facilitating Tracking-by-Detection to the Unknown](https://arxiv.org/abs/2409.09293).
 
 This repository is still under development, and feel free to raise any issues at any time.
-## News🔥
-* (2024/9/14) Our paper is available at [arXiv](https://arxiv.org/abs/2409.09293).
+
 ## Abstract
 Multi-object tracking (MOT) emerges as a pivotal and highly promising branch in the field of computer vision. Classical closed-vocabulary MOT (CV-MOT) methods aim to track objects of predefined categories. Recently, some open-vocabulary MOT (OV-MOT) methods have successfully addressed the problem of tracking unknown categories. However, we found that the CV-MOT and OV-MOT methods each struggle to excel in the tasks of the other. In this paper, we present a unified framework, Associate Everything Detected (AED), that simultaneously tackles CV-MOT and OV-MOT by integrating with any off-the-shelf detector and supports unknown categories. Different from existing tracking-by-detection MOT methods, AED gets rid of prior knowledge (e.g. motion cues) and relies solely on highly robust feature learning to handle complex trajectories in OV-MOT tasks while keeping excellent performance in CV-MOT tasks. Specifically, we model the association task as a similarity decoding problem and propose a sim-decoder with an association-centric learning mechanism. The sim-decoder calculates similarities in three aspects: spatial, temporal, and cross-clip. Subsequently, association-centric learning leverages these threefold similarities to ensure that the extracted features are appropriate for continuous tracking and robust enough to generalize to unknown categories. Compared with existing powerful OV-MOT and CV-MOT methods, AED achieves superior performance on TAO, SportsMOT, and DanceTrack without any prior knowledge.
+
+## News🔥
+* (2024/9/14) Our paper is available at [arXiv](https://arxiv.org/abs/2409.09293).
+
 ## Comming soon
 - [ ] Track on your own video.
 
