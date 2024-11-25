@@ -770,7 +770,7 @@ def build(args):
     transformer = build_deforamble_transformer(args)
     d_model = transformer.d_model
     hidden_dim = args.dim_feedforward
-    query_updating_layer = build_query_updating_layer(args, d_model, hidden_dim, d_model*2)
+    query_updating_layer = build_query_updating_layer(args)
 
     num_frames_per_batch = max(args.sampler_lengths)
     weight_dict = {}

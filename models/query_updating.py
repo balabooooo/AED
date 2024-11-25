@@ -6,11 +6,9 @@ from util import box_ops
 from models.structures import Boxes, Instances, pairwise_iou
 
 class QueryUpdating(nn.Module):
-    def __init__(self, args, dim_in, hidden_dim, dim_out, max_track_num=200, ema_weight=0.9, dropout=0):
+    def __init__(self, args):
         super().__init__()
         self.random_drop = args.random_drop
-        self.max_track_num = max_track_num
-        self.ema_weight = ema_weight
 
     def _random_drop_proposals(self, track_instances: Instances, num_proposals) -> Instances:
         if self.random_drop > 0 and num_proposals > 0:
@@ -51,8 +49,9 @@ class QueryUpdating(nn.Module):
         return active_track_instances, num_active_proposals, active_idxes
     
 class QueryUpdatingEMA(QueryUpdating):
-    def __init__(self, args, dim_in, hidden_dim, dim_out, max_track_num=200, ema_weight=0.9, dropout=0):
-        super().__init__(args, dim_in, hidden_dim, dim_out, max_track_num, ema_weight, dropout)
+    def __init__(self, args, ema_weight=0.9):
+        super().__init__(args)
+        self.ema_weight = ema_weight
 
     def _update_track_embedding(self, track_instances: Instances, num_proposals) -> Instances:
         p_output_embeddings = track_instances.output_embedding[:num_proposals]
@@ -78,5 +77,5 @@ def pos2posemb(pos, num_pos_feats=64, temperature=10000):
     return posemb
 
 
-def build(args, dim_in, hidden_dim, dim_out):
-    return QueryUpdatingEMA(args, dim_in, hidden_dim, dim_out, args.max_track_num, ema_weight=args.ema_weight)
+def build(args):
+    return QueryUpdatingEMA(args, ema_weight=args.ema_weight)

@@ -159,8 +159,6 @@ def get_args_parser():
                         help='random track drop ratio in QueryUpdating.')
     parser.add_argument('--use_checkpoint', action='store_true', default=False,
                         help='use checkpoint to save GPU memory')
-    parser.add_argument('--max_track_num', default=200, type=int,
-                        help='matching thresh in hungarian matcher')
     parser.add_argument('--ema_weight', default=0.5, type=float,
                         help='ema weight in QueryUpdating')
     parser.add_argument('--match_high_score', type=float, default=0.7)
