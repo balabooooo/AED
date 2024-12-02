@@ -34,7 +34,6 @@
 --train_match_thresh 0.5
 --val_max_det_num 100
 --train_max_det_num 200
---max_track_num 300
 --train_iou_thresh 0.5
 --ema_weight 0.5
 --sample_interval 3
