@@ -153,7 +153,7 @@ def get_args_parser():
                         help='mode of sampling frames from datasets')
     
     # mot settings
-    parser.add_argument('--mot_path', type=str, required=True,
+    parser.add_argument('--mot_path', type=str, default='data',
                         help='root path to mot datasets')
     parser.add_argument('--random_drop', type=float, default=0,
                         help='random track drop ratio in QueryUpdating.')

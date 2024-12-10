@@ -34,60 +34,6 @@ from models.structures import Instances
 from torch.utils.data import Dataset, DataLoader
 
 
-class ListImgDataset(Dataset):
-    def __init__(self, mot_path, img_list, det_db) -> None:
-        super().__init__()
-        self.mot_path = mot_path
-        self.img_list = img_list
-        self.det_db = det_db
-
-        '''
-        common settings
-        '''
-        self.img_height = 800
-        self.img_width = 1536
-        self.mean = [0.485, 0.456, 0.406]
-        self.std = [0.229, 0.224, 0.225]
-
-    def load_img_from_file(self, f_path):
-        cur_img = cv2.imread(os.path.join(self.mot_path, f_path))
-        assert cur_img is not None, f_path
-        cur_img = cv2.cvtColor(cur_img, cv2.COLOR_BGR2RGB)
-        proposals = []
-        im_h, im_w = cur_img.shape[:2]
-        for line in self.det_db[f_path[:-4] + '.txt']:
-            l, t, w, h, s = list(map(float, line.split(',')))
-            l = max(0, min(l, im_w - 1))
-            t = max(0, min(t, im_h - 1))
-            w = max(0, min(w, im_w - l))
-            h = max(0, min(h, im_h - t))
-            proposals.append([(l + w / 2) / im_w,
-                                (t + h / 2) / im_h,
-                                w / im_w,
-                                h / im_h,
-                                s])
-        return cur_img, torch.as_tensor(proposals).reshape(-1, 5)
-
-    def init_img(self, img, proposals):
-        ori_img = img.copy()
-        self.seq_h, self.seq_w = img.shape[:2]
-        scale = self.img_height / min(self.seq_h, self.seq_w)
-        if max(self.seq_h, self.seq_w) * scale > self.img_width:
-            scale = self.img_width / max(self.seq_h, self.seq_w)
-        target_h = int(self.seq_h * scale)
-        target_w = int(self.seq_w * scale)
-        img = cv2.resize(img, (target_w, target_h))
-        img = F.normalize(F.to_tensor(img), self.mean, self.std)
-        img = img.unsqueeze(0)
-        return img, ori_img, proposals
-
-    def __len__(self):
-        return len(self.img_list)
-    
-    def __getitem__(self, index):
-        img, proposals = self.load_img_from_file(self.img_list[index])
-        return self.init_img(img, proposals)
-
 class MyTracker:
     def __init__(self, args, model, data):
         self.args = args

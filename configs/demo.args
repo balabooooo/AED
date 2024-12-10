@@ -1,0 +1,15 @@
+--config_file configs/GroundingDINO_SwinB_cfg.py
+--checkpoint_path pretrained/groundingdino_swinb_cogcoor.pth
+--video_path demo/demo.mp4
+--meta_arch AED
+--val_nms_thresh 0.4
+--val_score_thresh 0.3
+--match_high_score 0.4
+--val_match_high_thresh 0.5
+--val_match_low_thresh 0.5
+--ema_weight 0.5
+--decoder_cross_self
+--resume pretrained/tao_ckpt_train.pth
+--demo_output_dir demo/output
+--miss_tolerance 30
+--text_prompt  "motorbike . person . helmet . shirt ."

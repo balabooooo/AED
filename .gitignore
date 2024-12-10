@@ -13,3 +13,4 @@ data/*
 *.jpg
 *.png
 *.log
+!demo/demo.mp4

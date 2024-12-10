@@ -12,10 +12,12 @@ This repository is still under development, and feel free to raise any issues at
 Multi-object tracking (MOT) emerges as a pivotal and highly promising branch in the field of computer vision. Classical closed-vocabulary MOT (CV-MOT) methods aim to track objects of predefined categories. Recently, some open-vocabulary MOT (OV-MOT) methods have successfully addressed the problem of tracking unknown categories. However, we found that the CV-MOT and OV-MOT methods each struggle to excel in the tasks of the other. In this paper, we present a unified framework, Associate Everything Detected (AED), that simultaneously tackles CV-MOT and OV-MOT by integrating with any off-the-shelf detector and supports unknown categories. Different from existing tracking-by-detection MOT methods, AED gets rid of prior knowledge (e.g. motion cues) and relies solely on highly robust feature learning to handle complex trajectories in OV-MOT tasks while keeping excellent performance in CV-MOT tasks. Specifically, we model the association task as a similarity decoding problem and propose a sim-decoder with an association-centric learning mechanism. The sim-decoder calculates similarities in three aspects: spatial, temporal, and cross-clip. Subsequently, association-centric learning leverages these threefold similarities to ensure that the extracted features are appropriate for continuous tracking and robust enough to generalize to unknown categories. Compared with existing powerful OV-MOT and CV-MOT methods, AED achieves superior performance on TAO, SportsMOT, and DanceTrack without any prior knowledge.
 
 ## News🔥
+* (2024/12/10) The demo using GroundingDINO + AED has been released. You can track on your own video now!
 * (2024/9/14) Our paper is available at [arXiv](https://arxiv.org/abs/2409.09293).
 
 ## Comming soon
-- [ ] Track on your own video.
+- [x] Track on your own video.
+- [ ] Deploy AED using TensorRT.
 
 ## Main Results
 ### TAO Test Set
@@ -41,10 +43,11 @@ The codebase is built on top of [MOTRv2](https://github.com/megvii-research/MOT
 ### Requirements
 * Install pytorch using conda (optional), PyTorch>=1.5.1, torchvision>=0.6.1
 ```bash
-conda create -n aed python=3.7
+conda create -n aed python=3.8
 conda activate aed
 # pytorch installation please refer to https://pytorch.org/get-started/previous-versions/
-conda install pytorch==1.10.1 torchvision==0.11.2 -c pytorch
+# e.g. for cuda 11.3
+conda install pytorch==1.10.1 torchvision==0.11.2 cudatoolkit=11.3 -c pytorch -c conda-forge
 ```
 * Other Requirements
 ```bash
@@ -52,11 +55,12 @@ pip install -r requirements.txt
 ```
 * Build MultiScaleDeformableAttention
 ```bash
+cd <AED_HOME>
 cd ./models/ops
 sh ./make.sh
 ```
 ## Dataset preparation
-It is recommended to symlink the dataset root to `$AED/data`.
+It is recommended to symlink the dataset root to `<AED_HOME>/data`.
 ### TAO Dataset
 1. Pleases download TAO from [here](https://motchallenge.net/tao_download.php).
 2. Note that you need to fill in this [form](https://motchallenge.net/tao_download_secure.php) to request missing AVA and HACS videos in the TAO dataset.
@@ -136,21 +140,23 @@ Here are the details for the json files:
 ```
 ## Training
 Download coco pretrained weight from [here (Deformable DETR + iterative bounding box refinement)](https://drive.google.com/file/d/1JYKyRYzUH7uo9eVfDaVCiaIGZb5YTCuI/view) first.
-Then put the downloaded weight into `$AED/pretrained`.
+Then put the downloaded weight into `<AED_HOME>/pretrained`.
 Please make sure you set the right **absolute** path of `--pretrained`, `--mot_path`, `--train_det_path`, and `--val_det_path`.
 ```bash
 # TAO
+cd <AED_HOME>
 # e.g. bash ./tools/train_tao.sh configs/tao.args 0
-bash ./tools/train_tao.sh [config path] [GPU index]
+bash tools/train_tao.sh [config path] [GPU index]
 # SportsMOT
-bash ./tools/train_sportsmot.sh [config path] [GPU index]
+bash tools/train_sportsmot.sh [config path] [GPU index]
 # DanceTrack
-bash ./tools/train_dancetrack.sh [config path] [GPU index]
+bash tools/train_dancetrack.sh [config path] [GPU index]
 ```
 Multi-GPU is not supported yet.
-After training, the results are saved in `$AED/exps/[dataset name]`
+After training, the results are saved in `<AED_HOME>/exps/[dataset name]`
+
 ## Inference
-Put the downloaded weight into `$AED/pretrained` like:
+Put the downloaded weights into `<AED_HOME>/pretrained` like:
 ```
 pretrained
 ├── dancetrack_ckpt_train.pth
@@ -160,6 +166,7 @@ pretrained
 ```
 start inference
 ```bash
+cd <AED_HOME>
 # TAO
 # e.g. bash tools/inference_tao.sh pretrained/tao_ckpt_train_base.pth configs/tao.args test 0
 # Remember to choose the right --val_det_path in the config to specify a detector.
@@ -169,12 +176,14 @@ bash tools/inference_sportsmot.sh [checkpoint path] [config path] [split (val / 
 # DanceTrack
 bash tools/inference_dancetrack.sh [checkpoint path] [config path] [split (val / test)] [GPU index]
 ```
-After inference, the results are saved in `$AED/exps/[dataset name]_infer_results`.
+After inference, the results are saved in `<AED_HOME>/exps/[dataset name]_infer_results`.
 
 For SportsMOT and DanceTrack, you can upload the results to [codalab](https://codalab.lisn.upsaclay.fr/) to get the final score.
+
 ## Evaluations (Optional)
 ### TAO
 ```bash
+cd <AED_HOME>
 # e.g. python tools/eval_tao.py --ann_file ./data/validation_ours_v1.json --res_path exps/tao_infer_results/infer1/inference_result/infer_result.json
 python tools/eval_tao.py --ann_file path_to_annotations --res_path path_to_results
 ```
@@ -182,7 +191,7 @@ python tools/eval_tao.py --ann_file path_to_annotations --res_path path_to_resul
 You need to use [TrackEval](https://github.com/JonathonLuiten/TrackEval) for evaluation (val set).
 ```bash
 # move to the path of AED
-cd $AED
+cd <AED_HOME>
 git clone https://github.com/JonathonLuiten/TrackEval.git
 # e.g. 
 # bash eval_sportsmot.sh \
@@ -190,12 +199,35 @@ git clone https://github.com/JonathonLuiten/TrackEval.git
 # ./data/SportsMOT/splits_txt/val.txt \
 # exps/sportsmot_infer_results/infer1/result_txt \
 # exps/sportsmot_infer_results/infer1
-bash ./tools/eval_dancetrack.sh [GT path] [split txt path] [result_txt path] [output path]
-bash ./tools/eval_sportsMOT.sh [GT path] [split txt path] [result_txt path] [output path]
+bash tools/eval_dancetrack.sh [GT path] [split txt path] [result_txt path] [output path]
+bash tools/eval_sportsMOT.sh [GT path] [split txt path] [result_txt path] [output path]
 ```
 Split txt of DanceTrack can be found in [here](https://github.com/DanceTrack/DanceTrack/tree/main/dancetrack).
+
+## Demo (AED + GroundingDINO)
+Install GroundingDINO following [the GroundingDINO repository](https://github.com/IDEA-Research/GroundingDINO):
+```bash
+cd <AED_HOME>
+cd GroundingDINO
+# set the CUDA_HOME, e.g. /usr/local/cuda
+export CUDA_HOME=/usr/local/cuda
+pip install -e .
+cd <AED_HOME>
+mkdir pretrained
+cd pretrained
+wget -q https://github.com/IDEA-Research/GroundingDINO/releases/download/v0.1.0-alpha/groundingdino_swint_ogc.pth
+wget -q https://github.com/IDEA-Research/GroundingDINO/releases/download/v0.1.0-alpha2/groundingdino_swinb_cogcoor.pth
+```
+Run the demo:
+```bash
+cd <AED_HOME>
+# e.g. bash tools/run_demo.sh configs/demo.args 0
+bash tools/run_demo.sh configs/demo.args [GPU index]
+```
+You can set the "--text_prompt" argument in `configs/demo.args` following [GroundingDINO](https://github.com/IDEA-Research/GroundingDINO) to track other categories.
+
 ## Acknowledgements & Citation
-We would like to express our sincere gratitude to the following works (in no particular order): [MOTRv2](https://github.com/megvii-research/MOTRv2), [OVTrack](https://github.com/SysCV/ovtrack), [QDTrack](https://github.com/SysCV/qdtrack), [RegionCLIP](https://github.com/microsoft/RegionCLIP), [Co-DETR](https://github.com/Sense-X/Co-DETR),[YOLOX](https://github.com/Megvii-BaseDetection/YOLOX).
+We would like to express our sincere gratitude to the following works (in no particular order): [MOTRv2](https://github.com/megvii-research/MOTRv2), [OVTrack](https://github.com/SysCV/ovtrack), [QDTrack](https://github.com/SysCV/qdtrack), [RegionCLIP](https://github.com/microsoft/RegionCLIP), [Co-DETR](https://github.com/Sense-X/Co-DETR), [YOLOX](https://github.com/Megvii-BaseDetection/YOLOX) and [GroundingDINO](https://github.com/IDEA-Research/GroundingDINO).
 
 If you find this work useful, please consider to cite our paper:
 ```
