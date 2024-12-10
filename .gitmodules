@@ -1,3 +1,6 @@
 [submodule "GroundingDINO"]
 	path = GroundingDINO
 	url = https://github.com/IDEA-Research/GroundingDINO
+[submodule "TrackEval"]
+	path = TrackEval
+	url = https://github.com/JonathonLuiten/TrackEval.git

@@ -192,7 +192,6 @@ You need to use [TrackEval](https://github.com/JonathonLuiten/TrackEval) for eva
 ```bash
 # move to the path of AED
 cd <AED_HOME>
-git clone https://github.com/JonathonLuiten/TrackEval.git
 # e.g. 
 # bash eval_sportsmot.sh \
 # ./data/SportsMOT/dataset/val \
