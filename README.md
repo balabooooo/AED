@@ -164,7 +164,7 @@ pretrained
 ├── sportsmot_ckpt_train.pth
 └── tao_ckpt_train_base.pth
 ```
-start inference
+Start inference:
 ```bash
 cd <AED_HOME>
 # TAO
@@ -204,6 +204,9 @@ bash tools/eval_sportsMOT.sh [GT path] [split txt path] [result_txt path] [outpu
 Split txt of DanceTrack can be found in [here](https://github.com/DanceTrack/DanceTrack/tree/main/dancetrack).
 
 ## Demo (AED + GroundingDINO)
+
+<img src="assets/demo.gif" width="600"/>
+
 Install GroundingDINO following [the GroundingDINO repository](https://github.com/IDEA-Research/GroundingDINO):
 ```bash
 cd <AED_HOME>
