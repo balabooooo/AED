@@ -42,7 +42,7 @@ class WeightAttention(nn.Module):
         weight_cos = weight_cos.sum(dim=1) / self.num_heads
         weight_mm = weight_mm.sum(dim=1) / self.num_heads
 
-        weight_cos = torch.clamp(weight_cos, min=0)
+        weight_cos = torch.clamp(weight_cos, min=0, max=1)
         return weight_cos, weight_mm
 
 
