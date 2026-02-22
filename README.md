@@ -16,10 +16,6 @@ Multi-object tracking (MOT) emerges as a pivotal and highly promising branch in 
 * (2024/12/10) The demo using GroundingDINO + AED has been released. You can track on your own video now!
 * (2024/9/14) Our paper is available at [arXiv](https://arxiv.org/abs/2409.09293).
 
-## Comming soon
-- [x] Track on your own video.
-- [ ] Deploy AED using TensorRT.
-
 ## Main Results
 ### TAO Test Set
 
