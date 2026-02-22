@@ -14,6 +14,7 @@ Multi-object tracking (MOT) emerges as a pivotal and highly promising branch in 
 ## News🔥
 * (2024/12/10) The demo using GroundingDINO + AED has been released. You can track on your own video now!
 * (2024/9/14) Our paper is available at [arXiv](https://arxiv.org/abs/2409.09293).
+* (2025/7/8) Our paper has been accepted by IEEE Transactions on Image Processing.
 
 ## Comming soon
 - [x] Track on your own video.
