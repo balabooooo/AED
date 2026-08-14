@@ -1,3 +1,5 @@
+
+
 # Associate Everything Detected: Facilitating Tracking-by-Detection to the Unknown
 [![arXiv](https://img.shields.io/badge/arXiv-2409.09293-red.svg)](https://arxiv.org/abs/2409.09293)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/associate-everything-detected-facilitating/multi-object-tracking-on-tao)](https://paperswithcode.com/sota/multi-object-tracking-on-tao?p=associate-everything-detected-facilitating)
@@ -36,7 +38,7 @@ Multi-object tracking (MOT) emerges as a pivotal and highly promising branch in 
 | AED        | TAO-train         | 55.2     | 57.0     | 37.8     | 91.0     |                                                                                             |
 | AED        | DanceTrack-train  | 66.6     | 69.7     | 54.3     | 92.2     | [model](https://drive.google.com/file/d/1vli10hglrE_jBbgTgoG4A5eUXMpgKDlH/view?usp=sharing) |
 ## Installation
-The codebase is built on top of [MOTRv2](https://github.com/megvii-research/MOTRv2).
+The codebase is built on top of MOTRv2.
 ### Requirements
 * Install pytorch using conda (optional), PyTorch>=1.5.1, torchvision>=0.6.1
 ```bash
@@ -57,15 +59,15 @@ cd ./models/ops
 sh ./make.sh
 ```
 ## Dataset preparation
-It is recommended to symlink the dataset root to `<AED_HOME>/data`.
+It is recommended to symlink the dataset root to <AED_HOME>/data.
 ### TAO Dataset
-1. Pleases download TAO from [here](https://motchallenge.net/tao_download.php).
+1. Please download TAO from [here](https://motchallenge.net/tao_download.php).
 2. Note that you need to fill in this [form](https://motchallenge.net/tao_download_secure.php) to request missing AVA and HACS videos in the TAO dataset.
-3. Convert TAO to COCO format and generate TAO val & test v1 filefollowing [OVTrack](https://github.com/SysCV/ovtrack), or you can simply download from [here](https://drive.google.com/file/d/1S2s9sbvhPrHh4XXpb2Qjce1G6i6W5lVh/view?usp=sharing).
+3. Convert TAO to COCO format and generate TAO val & test v1 file following [OVTrack](https://github.com/SysCV/ovtrack), or you can simply download from [here](https://drive.google.com/file/d/1S2s9sbvhPrHh4XXpb2Qjce1G6i6W5lVh/view?usp=sharing).
 ### SportsMOT Dataset
-Pleases download SportsMOT from [SportsMOT](https://github.com/MCG-NJU/SportsMOT).
+Please download SportsMOT from [SportsMOT](https://github.com/MCG-NJU/SportsMOT).
 ### DanceTrack Dataset
-Pleases download DanceTrack from [DanceTrack](https://github.com/DanceTrack/DanceTrack).
+Please download DanceTrack from [DanceTrack](https://github.com/DanceTrack/DanceTrack).
 ### Detection Results
 We've run the inference phase on two detectors, RegionCLIP and Co-DETR, and saved their detection results as JSON files.
 
